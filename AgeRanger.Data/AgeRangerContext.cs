@@ -1,6 +1,7 @@
 ﻿using AgeRanger.Entity;
 using Microsoft.EntityFrameworkCore;
 using System;
+using System.IO;
 
 namespace AgeRanger.Data
 {
@@ -15,8 +16,11 @@ namespace AgeRanger.Data
         {
             if (!optionsBuilder.IsConfigured)
             {
+                var projectFolder = Directory.GetCurrentDirectory();
+                string connString = string.Format("Filename={0}\\AgeRanger.db", projectFolder);
+                //string connString = "Filename={0}\\AgeRanger.db";
 #warning To protect potentially sensitive information in your connection string, you should move it out of source code. See http://go.microsoft.com/fwlink/?LinkId=723263 for guidance on storing connection strings.
-                optionsBuilder.UseSqlite(@"Filename=D:\Src\demos\AgeRanger\AgeRanger.db");
+                optionsBuilder.UseSqlite(connString);
             }
         }
 

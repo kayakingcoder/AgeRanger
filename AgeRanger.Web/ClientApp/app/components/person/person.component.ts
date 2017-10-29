@@ -51,14 +51,13 @@ export class PersonComponent {
 
     save() {
 
-        console.log("save", this.currentPerson)
-
         if (this.currentPerson.id == 0) {
             this.personService.Add(this.currentPerson).then(newPerson => {
-                //Bug here?
-                this.persons.push(newPerson);
-                let bob = newPerson;
-                console.log("bob", bob);
+                //this.persons.push(newPerson);
+                //Not ideal, but I'm out of time
+                this.personService.GetAll("").then(people => {
+                    this.persons = people;
+                });
             });
         } else {
             this.personService.Update(this.currentPerson).then(newPerson => {
@@ -69,7 +68,7 @@ export class PersonComponent {
 
     addPersonDialog() {
         this.currentPerson = new PrimePerson();
-        //this.currentPerson.ageGroup = new PrimeAgeGroup();
+        this.currentPerson.id = 0;
         this.displayDialog = true;
     }
 
