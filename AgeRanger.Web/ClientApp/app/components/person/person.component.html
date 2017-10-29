@@ -1,0 +1,49 @@
+<h1>Person Database</h1>
+<br />
+<p *ngIf="!persons"><em>Loading...</em></p>
+
+<div class="row">
+    <div class="col-sm-8">
+        <span class="ui-float-label">
+            <input id="search-field" [(ngModel)]="searchValue" type="text" size="40" pInputText>
+            <label for="search-field">Search name or surname</label>
+        </span>
+    </div>
+    <div class="col-sm-4">
+        <button pButton type="button" (click)="search()" icon="fa-search" label="Search"></button>
+    </div>
+</div>
+
+<p-dataTable [value]="persons" selectionMode="single" [(selection)]="currentPerson" (onRowSelect)="onRowSelect()" [paginator]="false" [rows]="100" [responsive]="true" #dt>
+    <header>Subscriber Management Service</header>
+    <p-column field="firstName" header="Name"></p-column>
+    <p-column field="lastName" header="Lastname"></p-column>
+    <p-column field="age" header="Age"></p-column>
+    <p-column field="age" header="Age Group"></p-column>
+    <p-footer><div class="ui-helper-clearfix" style="width:100%"><button type="button" pButton icon="fa-plus" style="float:left" (click)="addPersonDialog()" label="Add"></button></div></p-footer>
+</p-dataTable>
+
+<p-dialog header="Person Details" [visible]="displayDialog" [responsive]="false" showEffect="fade" [modal]="true" [closable]="false">
+    <div class="ui-grid ui-grid-responsive ui-fluid" *ngIf="currentPerson">
+        <div class="ui-grid-row">
+            <div class="ui-grid-col-4"><label for="firstname">FirstName</label></div>
+            <div class="ui-grid-col-8"><input pInputText id="firstname" [(ngModel)]="currentPerson.firstName" /></div>
+        </div>
+        <div class="ui-grid-row">
+            <div class="ui-grid-col-4"><label for="lastname">lastName</label></div>
+            <div class="ui-grid-col-8"><input pInputText id="lastname" [(ngModel)]="currentPerson.lastName" /></div>
+        </div>
+        <div class="ui-grid-row">
+            <div class="ui-grid-col-4"><label for="age">Age</label></div>
+            <div class="ui-grid-col-8"><input pInputText id="age" [(ngModel)]="currentPerson.age" /></div>
+        </div>
+    </div>
+    <footer>
+        <div class="ui-dialog-buttonpane ui-widget-content ui-helper-clearfix">
+            <button icon="fa-close" type="button" pButton (click)="hideDialog()" label="Close"></button>
+            <button icon="fa-check" type="button" pButton (click)="save()" label="Save"></button>
+        </div>
+    </footer>
+</p-dialog>
+
+

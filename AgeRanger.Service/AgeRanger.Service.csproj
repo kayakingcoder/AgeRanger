@@ -1,0 +1,13 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <ItemGroup>
+    <ProjectReference Include="..\AgeRanger.Entity\AgeRanger.Entity.csproj" />
+    <ProjectReference Include="..\AgeRanger.Data\AgeRanger.Data.csproj" />
+    <ProjectReference Include="..\AgeRanger.Core\AgeRanger.Core.csproj" />
+  </ItemGroup>
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.0</TargetFramework>
+  </PropertyGroup>
+
+</Project>
