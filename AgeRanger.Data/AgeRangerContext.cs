@@ -11,6 +11,8 @@ namespace AgeRanger.Data
         public virtual DbSet<AgeGroup> AgeGroup { get; set; }
         public virtual DbSet<Person> Person { get; set; }
 
+        public AgeRangerContext(DbContextOptions<AgeRangerContext> options)
+        : base(options) { }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -18,7 +20,6 @@ namespace AgeRanger.Data
             {
                 var projectFolder = Directory.GetCurrentDirectory();
                 string connString = string.Format("Filename={0}\\AgeRanger.db", projectFolder);
-                //string connString = "Filename={0}\\AgeRanger.db";
 #warning To protect potentially sensitive information in your connection string, you should move it out of source code. See http://go.microsoft.com/fwlink/?LinkId=723263 for guidance on storing connection strings.
                 optionsBuilder.UseSqlite(connString);
             }

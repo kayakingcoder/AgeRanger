@@ -11,6 +11,8 @@ using AgeRanger.Data;
 using AgeRanger.Service;
 using AgeRanger.Web;
 using Swashbuckle.AspNetCore.Swagger;
+using Microsoft.EntityFrameworkCore;
+using System.IO;
 
 namespace AgeRanger_Web
 {
@@ -26,7 +28,10 @@ namespace AgeRanger_Web
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddDbContext<AgeRangerContext>();
+            var projectFolder = Directory.GetCurrentDirectory();
+            string connString = string.Format("Filename={0}\\AgeRanger.db", projectFolder);
+
+            services.AddDbContext<AgeRangerContext>(options => options.UseSqlite(connString));
 
             services.AddCors(options =>
             {
